@@ -10,30 +10,33 @@
 
       #editor {
         margin: 0;
-        position: absolute;
-        top: 0;
+        /*position: absolute;*/
+        top: 50;
         bottom: 0;
         left: 0;
         right: 0;
+        height: 500px;
       } 
     </style>
   </head>
 
   <body>
-    <div id="editor"></div> 
+    <button id="update-main-win" type="button">Update</button>
+    <div id="editor"></div>
     <script src="../3rd-part/ace/ace.js" type="text/javascript" charset="utf-8"></script>
     <script>
       var editor = ace.edit("editor");
       editor.setTheme("ace/theme/monokai");
       // FIXME: an XHTML mode would be better, but there exists no such built-in mode
       editor.getSession().setMode("ace/mode/xml");
-      editor.setReadOnly(true);
+      // editor.setReadOnly(true);
       // read the relative URL to the template file in the main window
-      var relativeUrl = window.opener.document.getElementById("url").value;
+      var mainWindow = window.opener;
+      var relativeUrl = mainWindow.document.getElementById("url").value;
       window.document.title = "Source of '" + relativeUrl + "'";
       var xhr = new XMLHttpRequest();
       xhr.open('GET', relativeUrl);
-      xhr.addEventListener('readystatechange', function () {
+      xhr.addEventListener('readystatechange', function() {
         // xhr.status === 0 is useful for local testing with no HTTP server
         if (xhr.readyState === XMLHttpRequest.DONE && (xhr.status === 200 || xhr.status === 0)) {
           /* could use xhr.responseXML, since we read an xhtml file. But for insertion into the ace
@@ -43,6 +46,19 @@
         }
       });
       xhr.send(null);
+      
+
+      // function htmlToElements(sHtml) {
+      //   var template = document.createElement('template');
+      //   template.innerHTML = sHtml;
+      //   return template.content.childNodes;
+      // }
+      document.getElementById("update-main-win").addEventListener('click', function() {
+        console.log("pause");
+        let iframe = mainWindow.document.getElementById('container');
+        iframe.srcdoc = editor.getValue();
+        // let htmlE = htmlToElements(editor.getValue());
+      });
     </script>
   </body>
 </html>
