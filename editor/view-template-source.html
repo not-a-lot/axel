@@ -56,7 +56,10 @@
       document.getElementById("update-main-win").addEventListener('click', function() {
         console.log("pause");
         let iframe = mainWindow.document.getElementById('container');
-        iframe.srcdoc = editor.getValue();
+        mainWindow.xtdom.addEventListener(iframe, 'load', mainWindow.appController.frameLoadedHandler, false);
+        //iframe.srcdoc = editor.getValue();
+        iframe.src = "data:application/xhtml+xml," + editor.getValue();
+        
         // let htmlE = htmlToElements(editor.getValue());
       });
     </script>
