@@ -29,12 +29,15 @@ $(
       }
     }
 
+    // TODO : is this really what we want ? What about xt:repeat and other non-xt nested elements ?
     document.querySelectorAll("div.extract").forEach(function(div) {
-      const useElems = div.getElementsByTagNameNS("http://ns.inria.org/xtiger", "use");
-      const attrElems = div.getElementsByTagNameNS("http://ns.inria.org/xtiger", "attribute");
-      const xtElems = Array.from(useElems).concat(Array.from(attrElems));
+      // it doesn't seem to be possible to use an "OR" syntax in the node name
+      const xtElems = Array.from(div.getElementsByTagNameNS("http://ns.inria.org/xtiger", "*"));
       const buffer = xtElems.map(function(elem) {
-        return dumpXML(elem);
+        const nodeName = elem.nodeName.toLowerCase();
+        if (nodeName === 'xt:use' || nodeName === 'xt:attribute') {
+           return dumpXML(elem);
+        }
       });
       const src = "<div class='source'><pre>" + buffer.join('<br/>') + "</pre></div>";
       try {
