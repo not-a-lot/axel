@@ -33,10 +33,11 @@ $(
     document.querySelectorAll("div.extract").forEach(function(div) {
       // it doesn't seem to be possible to use an "OR" syntax in the node name
       const xtElems = Array.from(div.getElementsByTagNameNS("http://ns.inria.org/xtiger", "*"));
-      const buffer = xtElems.map(function(elem) {
+      const buffer = [];
+      xtElems.forEach(function(elem) {
         const nodeName = elem.nodeName.toLowerCase();
         if (nodeName === 'xt:use' || nodeName === 'xt:attribute') {
-           return dumpXML(elem);
+           buffer.push(dumpXML(elem));
         }
       });
       const src = "<div class='source'><pre>" + buffer.join('<br/>') + "</pre></div>";
