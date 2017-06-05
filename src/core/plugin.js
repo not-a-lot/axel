@@ -258,12 +258,12 @@ xtiger.editor.Plugin.prototype = {
   // There will be one instance per registered plugin  //
   ///////////////////////////////////////////////////////
   function PluginFactory ( name, spec, defaults, klassdefs ) {
-  this.type = name;
-  this.spec = spec;
-  this.defaults = defaults;
-  this.klassdefs = klassdefs;
-  this.klass = null; // lazy creation for unfiltered klass
-  this.fklass = {}; // lazy creation for filtered klass
+    this.type = name;
+    this.spec = spec;
+    this.defaults = defaults;
+    this.klassdefs = klassdefs;
+    this.klass = null; // lazy creation for unfiltered klass
+    this.fklass = {}; // lazy creation for filtered klass
   }
 
   PluginFactory.prototype = {

@@ -563,6 +563,9 @@
     if (typeof nodes === 'string') { // jQuery selector
       if (GLOBAL.jQuery) {
         target = $(nodes, doc || document).get();
+        // FIXME : suggested replacement (as long as 'doc' cannot be a jQuery element itself) :
+        // target = [(doc || document).querySelector(nodes)];
+        // (this avoids creating a jQuery object that is immediately discarded)
       } else {
         xtiger.cross.log('warning', 'jQuery missing to interpet wrapped set selector "' + nodes  + '"');
         target = [];

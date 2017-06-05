@@ -57,8 +57,8 @@
         console.log("pause");
         let iframe = mainWindow.document.getElementById('container');
         mainWindow.xtdom.addEventListener(iframe, 'load', mainWindow.appController.frameLoadedHandler, false);
-        //iframe.srcdoc = editor.getValue();
-        iframe.src = "data:application/xhtml+xml," + editor.getValue();
+        iframe.srcdoc = "data:application/xhtml+xml," + editor.getValue();
+        //iframe.src = "data:application/xhtml+xml," + editor.getValue();
         
         // let htmlE = htmlToElements(editor.getValue());
       });
