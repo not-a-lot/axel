@@ -502,10 +502,7 @@
           bundlesPath : this.xttMakeLocalURLFor(this.config.baseUrl),
           enableTabGroupNavigation : true,
           }
-          ); // ici on passe un deuxième arg optionnel, pas exprimé par la signature de transform.
-          // Il faudrait changer ça, ce n'est pas très clair. Ce qui est particulier ici est que
-          // les deux arguments sont optionnels. Les default function parameters de ES 6 sont supportés
-          // à partir de Edge 14
+          );
           if (this.curForm.transformed()) {
             this.activateDocumentCommands();
           }
