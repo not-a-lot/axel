@@ -148,7 +148,7 @@
           if (xtiger.editor.Plugin.prototype.pluginEditors[target]) { // FIXME: $axel.plugin.get(target)
             xtiger.editor.Plugin.prototype.pluginEditors[target].registerFilter(key, filterMixin);
           } else {
-            xtiger.cross.log('error', 'attempt to register filter "' + key + '" on unkown plugin "' + target + '"' );
+            xtiger.cross.log('error', 'attempt to register filter "' + key + '" on unknown plugin "' + target + '"' );
           }
         }
       } else {
