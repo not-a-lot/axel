@@ -46,21 +46,14 @@
         }
       });
       xhr.send(null);
-      
 
-      // function htmlToElements(sHtml) {
-      //   var template = document.createElement('template');
-      //   template.innerHTML = sHtml;
-      //   return template.content.childNodes;
-      // }
       document.getElementById("update-main-win").addEventListener('click', function() {
         console.log("pause");
         let iframe = mainWindow.document.getElementById('container');
         mainWindow.xtdom.addEventListener(iframe, 'load', mainWindow.appController.frameLoadedHandler, false);
-        iframe.srcdoc = "data:application/xhtml+xml," + editor.getValue();
-        //iframe.src = "data:application/xhtml+xml," + editor.getValue();
-        
-        // let htmlE = htmlToElements(editor.getValue());
+        iframe.src = "data:application/xhtml+xml," + editor.getValue();
+        // There is also 'iframe.srcdoc', would probably be better, but doesn't seem to work at all :
+        // iframe.srcdoc = editor.getValue();
       });
     </script>
   </body>
