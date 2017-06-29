@@ -3052,6 +3052,9 @@ xtiger.util.Form.prototype = {
     if (typeof nodes === 'string') { // jQuery selector
       if (GLOBAL.jQuery) {
         target = $(nodes, doc || document).get();
+        // FIXME : suggested replacement (as long as 'doc' cannot be a jQuery element itself) :
+        // target = [(doc || document).querySelector(nodes)];
+        // (this avoids creating a jQuery object that is immediately discarded)
       } else {
         xtiger.cross.log('warning', 'jQuery missing to interpet wrapped set selector "' + nodes  + '"');
         target = [];
@@ -3374,12 +3377,12 @@ xtiger.editor.Plugin.prototype = {
   // There will be one instance per registered plugin  //
   ///////////////////////////////////////////////////////
   function PluginFactory ( name, spec, defaults, klassdefs ) {
-  this.type = name;
-  this.spec = spec;
-  this.defaults = defaults;
-  this.klassdefs = klassdefs;
-  this.klass = null; // lazy creation for unfiltered klass
-  this.fklass = {}; // lazy creation for filtered klass
+    this.type = name;
+    this.spec = spec;
+    this.defaults = defaults;
+    this.klassdefs = klassdefs;
+    this.klass = null; // lazy creation for unfiltered klass
+    this.fklass = {}; // lazy creation for filtered klass
   }
 
   PluginFactory.prototype = {
@@ -3711,7 +3714,7 @@ xtiger.editor.Plugin.prototype = {
           if (xtiger.editor.Plugin.prototype.pluginEditors[target]) { // FIXME: $axel.plugin.get(target)
             xtiger.editor.Plugin.prototype.pluginEditors[target].registerFilter(key, filterMixin);
           } else {
-            xtiger.cross.log('error', 'attempt to register filter "' + key + '" on unkown plugin "' + target + '"' );
+            xtiger.cross.log('error', 'attempt to register filter "' + key + '" on unknown plugin "' + target + '"' );
           }
         }
       } else {
